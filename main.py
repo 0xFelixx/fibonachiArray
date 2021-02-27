@@ -4,57 +4,90 @@ import time
 
 cv2.namedWindow("windows")
 
-num = 15
-fibo2 = 0
-fibo1 = 1
-# fibo = 0
-x1 = 300
-x2 = 300
-y1 = 200
-y2 = 200
+num = 17
 color = 255
-imSizeX = 500
-imSizeY = 500
+imSizeX = 1400
+imSizeY = 700
+x = 700
+y = 350
+
 
 arr = np.zeros(
 (imSizeY,imSizeX,3),
 "uint8"
 )
+for o in range(1000):
 
-for i in range(num):
-    fibo = fibo1 + fibo2 # Calculating the next number in the fibonachi sequence
+    fibo2 = 0
+    fibo1 = 1
+    fibo = fibo1 + fibo2
 
-    arr[y1:y2,x1:x2] = [0,color,0]
+    eksx1 = x# ekstra x1 so we're able to go not go in minus and thereby fuck it up without fucking it up
+    eksx2 = x
+    eksy1 = y
+    eksy2 = y
 
-    color -= 10
+    if o % 2 == 0:
+        color = 255
+    if o % 2 == 1:
+        color = 0
 
-    if i % 4 == 0:
-        y1 += fibo1
-        x2 += fibo2
-        y2 += fibo
 
-    elif i % 4 == 1:
-        x1 += fibo1
-        y1 -= fibo2
-        x2 += fibo
+    for i in range(num):
+        x1 = eksx1
+        x2 = eksx2
+        y1 = eksy1
+        y2 = eksy2
 
-    elif i % 4 == 2:
-        x1 -= fibo2
-        y1 -= fibo
-        y2 -= fibo1
+        if x2 < 0:
+            x2 = 0
 
-    elif i % 4 == 3:
-        x1 -= fibo
-        x2 -= fibo1
-        y2 += fibo2
+        if x1 < 0:
+            x1 = 0
 
-    time.sleep(.5)
+        if y2 < 0:
+            y2 = 0
 
-    fibo2 = fibo1 # Swapping around the variables
-    fibo1 = fibo
+        if y1 < 0:
+            y1 = 0
 
-    cv2.imshow("windows", arr)
-    key = cv2.waitKey(1)
+        arr[y1 + 1:y2 + 1,x1 + 1:x2 + 1] = [0,color,0]
+
+        if i % 4 == 0:
+            eksy1 += fibo1
+            eksx2 += fibo2
+            eksy2 += fibo
+
+        elif i % 4 == 1:
+            eksx1 += fibo1
+            eksy1 -= fibo2
+            eksx2 += fibo
+
+        elif i % 4 == 2:
+            eksx1 -= fibo2
+            eksy1 -= fibo
+            eksy2 -= fibo1
+
+        elif i % 4 == 3:
+            eksx1 -= fibo
+            eksx2 -= fibo1
+            eksy2 += fibo2
+
+        time.sleep(.1)
+
+        fibo2 = fibo1 # Swapping around the variables
+        fibo1 = fibo
+        fibo = fibo1 + fibo2 # Calculating the next number in the fibonachi sequence
+
+        cv2.imshow("windows", arr)
+        key = cv2.waitKey(1)
+
+        if key == 27:
+            break
+    if key == 27:
+        break
 
 time.sleep(5)
-cv2.destroyWindow("windows")
+cv2.destroyWindows = cv2.destroyWindow
+cv2.destroyWindows("windows")
+

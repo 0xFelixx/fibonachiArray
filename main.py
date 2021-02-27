@@ -1,8 +1,6 @@
-import numpy as np
+import numpy as np # Importing some stuf
 import cv2
 import time
-
-cv2.namedWindow("windows")
 
 num = 17
 color = 255
@@ -22,7 +20,7 @@ for o in range(1000):
     fibo1 = 1
     fibo = fibo1 + fibo2
 
-    eksx1 = x# ekstra x1 so we're able to go not go in minus and thereby fuck it up without fucking it up
+    eksx1 = x # Ekstra x1 so we're able to go not go in minus and thereby fuck it up without fucking it up
     eksx2 = x
     eksy1 = y
     eksy2 = y
@@ -79,15 +77,11 @@ for o in range(1000):
         fibo1 = fibo
         fibo = fibo1 + fibo2 # Calculating the next number in the fibonachi sequence
 
-        cv2.imshow("windows", arr)
+        cv2.imshow("fibo squares", arr)
         key = cv2.waitKey(1)
 
         if key == 27:
             break
     if key == 27:
         break
-
-time.sleep(5)
-cv2.destroyWindows = cv2.destroyWindow
-cv2.destroyWindows("windows")
-
+cv2.destroyWindow("")
